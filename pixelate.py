@@ -1,5 +1,6 @@
 from PIL import Image
 import os
+import sys
 
 def compress_image_to_8bit_color(image_path):
     # Open the input image
@@ -9,9 +10,9 @@ def compress_image_to_8bit_color(image_path):
 
 
     # Loop over each pixel in the input image and encode it
-    for x in range(input_image.width):
-        for y in range(input_image.height):
-            r, g, b = input_image.getpixel((x, y))
+    for x in range(input_image.height):
+        for y in range(input_image.width):
+            r, g, b = input_image.getpixel((y, x))
             encoded = ((r & 0xE0) | ((g & 0xE0) >> 3) | (b >> 6))
             print(encoded)
             binary_data.append(encoded)
@@ -22,8 +23,13 @@ def compress_image_to_8bit_color(image_path):
         binary_file.write(bytearray(binary_data))
         # binary_file.write(bytes)
 
+if __name__ == "__main__":
+    # Get the path of the input file from the command-line arguments
+    input_file_path = sys.argv[1]
 
+    # Convert the binary file to an image
+    compress_image_to_8bit_color(input_file_path)
 
-compress_image_to_8bit_color("./nnn.png")
+# compress_image_to_8bit_color("./nnn.png")
 
 
