@@ -3,8 +3,6 @@ import sys
 import os
 import math
 
-# todo: remember this needs to be done after rotate! 
-
 def rotate_visual_poi_style(file, fixed_width):
     # resize
     basewidth = fixed_width
@@ -12,14 +10,7 @@ def rotate_visual_poi_style(file, fixed_width):
     wpercent = (basewidth/float(im.size[0]))
     hsize = int((float(im.size[1])*float(wpercent)))
     img = im.resize((basewidth,hsize), Image.Resampling.LANCZOS)
-    print("img.height before rotate: ", img.height)
-    img_rotated = img.rotate(-90)
-    print("image_rotated height: ", img.height)
-    # print("image.width: ", img.width)
-    # Save the image as a new file
-    # output_file_path = os.path.splitext(file)[0] + "_resized.png"
-    # img.save(output_file_path, "PNG")
-    # img.show() # todo: not for server version!
+    img_rotated = img.rotate(-90) # rotate 90 degrees clockwise 
 
     # start rotate image now: 
     fit = 1
@@ -27,19 +18,19 @@ def rotate_visual_poi_style(file, fixed_width):
         fit = 1
     else:
         fit = 360 // img.height # using original width - because height doesn't change after rotate! 
-    #     print("fit is: ",  fit)
-      
+
+    # create a blank image and rotate the input image onto it multiple times
+    # to create the final spinning effect
+
     new_height = int(360 // fit)
-    newImg = Image.new(mode="RGB", size=(400, 400))
-    # img = img.resize((img.width, new_height))
+    newImg = Image.new(mode="RGB", size=(400, 400)) # todo: change for different size poi? 
 
     # resize for rotation: 
     img = img.resize((img_rotated.width, new_height), Image.Resampling.LANCZOS)
-    # create a blank image and rotate the input image onto it multiple times
-    # to create the final spinning effect
+
+    
     incrRotation = 0
     while incrRotation < 360:
-        # rotated_img = img.rotate(final_reached, resample=Image.BILINEAR, expand=True)
         w, h = img.size
         for y in range(h):
             for x in range(w):
