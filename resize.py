@@ -2,6 +2,7 @@ from PIL import Image
 import sys
 import os
 
+# todo: remember this needs to be done after rotate! 
 
 def resize_image(file, fixed_width):
     basewidth = fixed_width
