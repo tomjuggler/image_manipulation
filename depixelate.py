@@ -21,6 +21,7 @@ def convert_8bit_color_to_image(bin_file_path):
 
     # Save the image as a new file
     output_file_path = os.path.splitext(bin_file_path)[0] + "_new.png"
+    # todo: un-rotate here
     output_image.save(output_file_path, "PNG")
     output_image.show() # todo: not for server version!
 
