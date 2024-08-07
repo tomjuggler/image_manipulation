@@ -12,22 +12,22 @@ def rotate_visual_poi_style(file, fixed_width):
     # img = im.resize((basewidth,hsize), Image.Resampling.LANCZOS)
     # im.show()
 
-    img = im.transpose(Image.ROTATE_270)
-    # img_rotated = img.rotate(-90) # rotate 90 degrees clockwise # this adds a border around the image
+    # img = im.transpose(Image.ROTATE_270) # rotate 90 degrees the right way!
+    img = im.rotate(-90, expand=True) # rotate 90 degrees clockwise # this adds a border around the image
     img.show()
 
     img_rotated = img.resize((basewidth,hsize), Image.Resampling.LANCZOS)
     img_rotated.show()
     # start rotate image now: 
-    fit = 1
-    if (img_rotated.height > 360):
-        fit = 1
-    else:
-        print("img_rotated.height: ", img_rotated.height)
-        fit = 360 // img_rotated.height # using original width - because height doesn't change after rotate! 
-        print("fit: ", fit)
-    if fit == 2:
-        fit = 3 # looks better with 3
+    fit = 3 # looks best with 3 imo
+    # if (img_rotated.height > 360):
+    #     fit = 3
+    # else:
+    #     print("img_rotated.height: ", img_rotated.height)
+    #     fit = 360 // img_rotated.height # using original width - because height doesn't change after rotate! 
+    #     print("fit: ", fit)
+    # if fit == 2:
+    #     fit = 3 # looks better with 3
     # create a blank image and rotate the input image onto it multiple times
     # to create the final spinning effect
 
